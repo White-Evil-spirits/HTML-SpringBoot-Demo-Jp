@@ -1,6 +1,7 @@
 package com.zys.boot_jeep.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.zys.boot_jeep.domain.Cark;
 import com.zys.boot_jeep.service.CarkService;
 import com.zys.boot_jeep.util.DataGridView;
@@ -29,8 +30,8 @@ public class CarkController {
     @RequestMapping("getAllCar")
     public DataGridView getAllCar(Integer page){
         System.out.println(page);
-        List<Cark> list = carkService.getAllCar(page);
-        return new DataGridView(200,"成功", (long) list.size(),list);
+        IPage<Cark> iPage = carkService.getAllCar(page);
+        return new DataGridView(200,"成功", iPage.getTotal(),iPage.getRecords());
     }
 }
 

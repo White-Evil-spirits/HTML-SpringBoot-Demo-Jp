@@ -83,13 +83,18 @@
 
 		#ul_ids li {
 			float: left;
+			height: 20px;
+			width: 20px;
+			background-color: #1B6D85;
+			cursor: pointer;
+			margin-left: 10px;
 		}
 	</style>
 	<body>
 		<div id="app">
 			<div class="showcar">
 				<ul>
-					<li v-for="(item,index) in AllCarList" @click="carx()">
+					<li v-for="(item,index) in AllCarList" @click="carx(item.carid)">
 						<div class="car-image">
 							<img src="./images/jeepshowcar/list_jeep.png" class="imgd1">
 							<img :src="item.carimg" class="img2">
@@ -104,8 +109,8 @@
 				<div style="clear: both;"></div>
 
 			</div>
-			<ul id="ul_ids">
-				<li @click="">1</li>
+			<ul v-for="(item,index) in totle" id="ul_ids">
+				<li @click="getAllCar(index + 1)">{{ index + 1 }}</li>
 			</ul>
 		</div>
 
@@ -120,13 +125,18 @@
 			el: "#app",
 			data: {
 				AllCarList: [],
-				pages: 1
+				pages: 1,
+				totle: 0
 			},
 			created() {
 				this.getAllCar()
 			},
 			methods: {
-				getAllCar() {
+				getAllCar(pages) {
+					let that = this
+					if (pages) {
+						this.pages = pages
+					}
 					$.ajax({
 						url: api + "/api/cark/getAllCar",
 						async: true,
@@ -135,14 +145,16 @@
 						},
 						success: function(data) {
 							console.log(data)
-							this.AllCarList = data.data
-							console.log(this.AllCarList)
+							that.AllCarList = data.data
+							that.totle = Math.ceil(data.count / 3)
 						},
 						type: "post",
 						dataType: "json"
 					})
 				},
-				carx() {}
+				carx(carid) {
+					console.log(carid)
+				}
 			}
 		})
 	</script>

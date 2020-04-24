@@ -1,5 +1,6 @@
 package com.zys.boot_jeep.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.zys.boot_jeep.domain.Cark;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -15,5 +16,5 @@ import java.util.List;
  */
 public interface CarkService extends IService<Cark> {
     //所有产品
-    public List getAllCar(Integer page);
+    IPage getAllCar(Integer page);
 }

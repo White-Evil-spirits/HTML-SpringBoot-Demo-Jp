@@ -23,14 +23,14 @@ import java.util.List;
 public class CarkServiceImpl extends ServiceImpl<CarkMapper, Cark> implements CarkService {
 
     @Override
-    public List getAllCar(Integer page) {
-        IPage<Cark> iPage = new Page<>(page, 5);
+    public IPage getAllCar(Integer page) {
+        IPage<Cark> iPage = new Page<>(page, 3);
         QueryWrapper queryWrapper = new QueryWrapper();
 //        List<Cark> list = this.baseMapper.selectList(queryWrapper);
         this.baseMapper.selectPage(iPage,queryWrapper);
         List<Cark> list =  iPage.getRecords();
         System.out.println(list);
-        return list;
+        return iPage;
     }
 
 }

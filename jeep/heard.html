@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/heard.css" />
+		<script type="text/javascript" src="js/heard.js"></script>
+		<script src="js/jquery-3.3.1%20-%20xz.js" type="text/javascript"></script>
+		
+		<title></title>
+	</head>
+	<body>
+		<!-- 头部 ==================================================================================-->
+		<div style="width: 100%; background-color: #000000; position: fixed; height:93px; z-index: 1;" >
+			<div id="head">
+				<div id="head-top">
+					<!-- 占空  -->
+					<ul id="headul">
+						<li id="ul1">
+							<a href="#">总部客服</a>
+						</li>
+						<li id="ul2" style="width: 120px;">
+							<a href="">我的购物车</a>
+							<div id="shopcar">
+								0
+							</div>
+						</li>
+						<li id="ul3">
+							<a href="login.html">注册/登录</a>
+						</li>
+					</ul>
+				</div>
+				<div id="head-b">
+					<div id="head-b2">
+						<img src="image/jeepstore/nav_logo.png"  style="float:left;">
+						<ul>
+							<li style="" class="bgcolor" onclick="dhbgcolor(0)">
+								首页
+							</li>
+							<li class="bgcolor" onclick="dhbgcolor(1)">
+								我要定车
+							</li>
+							<li class="bgcolor" onclick="dhbgcolor(2)">
+								Jeep精品
+							</li>
+							<li class="bgcolor" onclick="dhbgcolor(3)">
+								咨询经销商
+							</li>
+						</ul>
+						<img src="image/jeepstore/wx.png" style="float: right; margin-top: 20px;cursor:pointer;" onmouseover="onweixin()" onmouseout="outweixin()" >
+						<div id="weixin-onms">
+							<span style="position: relative; top: -30px;">
+									即刻扫码关注Jeep商城微信<br>
+									更多商城活动信息即时送达
+							</span>
+							<img src="image/jeepstore/unpayed_erv.png" style="width: 61%; height: 50%;" >
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="height: 93px;">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		var loc = location.href;
+		var n1 = loc.length;//地址的总长度
+		var n2 = loc.indexOf("=");//取得=号的位置
+		var id = decodeURI(loc.substr(n2+1, n1-n2));//从=号后面的内容
+/* 		if(id!=0)
+		{
+			id=0;
+		} */
+		
+		$(function (){
+			$(".bgcolor").css("backgroundColor","black");
+			$(".bgcolor").css("color","white");
+			$(".bgcolor").eq(id).css("backgroundColor","#ffb400");
+			$(".bgcolor").eq(id).css("color","black");
+		})
+	</script>
+</html>

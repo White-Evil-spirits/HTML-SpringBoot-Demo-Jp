@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<style type="text/css">
+			.inputs {
+				width: 500px;
+				height: 300px;
+				background-color: blanchedalmond;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="" @click="getTime()" style="background-color: red; width: 200px; height: 200px;">
+				检查redis过期时间
+			</div>
+			<ul class="pagination">
+				<li class="disabled"><span>&laquo;</span></li>
+				<li class="active"><span>1</span></li>
+				<li><a href="/admin/manager/reply?page=2">2</a></li>
+				<li><a href="/admin/manager/reply?page=3">3</a></li>
+				<li><a href="/admin/manager/reply?page=4">4</a></li>
+				<li><a href="/admin/manager/reply?page=2">&raquo;</a></li>
+			</ul>
+			<div id="" class="inputs">
+				登陆
+				<div id="">
+					账号<input type="text" v-model="login.name" name="" id="" value="" />
+				</div>
+				<div id="">
+					密码<input type="text" v-model="login.pwd" name="" id="" value="" />
+				</div>
+				{{ success }}
+				<input type="button" @click="dologin" name="" id="" value="登录" />
+			</div>
+			<div id="" class="inputs">
+				注册
+				<div id="">
+					姓名<input type="text" v-model="resg.name" name="" id="" value="" />
+				</div>
+				<div id="">
+					密码<input type="text" v-model="resg.pwd" name="" id="" value="" />
+				</div>
+				<div id="">
+					电话<input type="text" v-model="resg.phone" name="" id="" value="" />
+				</div>
+				<div id="">
+				</div>
+				地址<input type="text" v-model="resg.addr" name="" id="" value="" />
+				<div id="">
+					身份<input type="text" v-model="resg.shenfen" name="" id="" value="" />
+				</div>
+				<div id="">
+					性别<input type="text" v-model="resg.sex" name="" id="" value="" />
+				</div>
+				<input type="button" @click="regs" name="" id="" value="注册" />
+				{{ success }}
+			</div>
+		</div>
+		<p style="
+    height: 45px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: overlay;"></p>
+	</body>
+
+	<script src="js/jquery.min.js" type="text/javascript">
+
+	</script>
+	<script src="js/jquery.cookie.min.js" type="text/javascript">
+
+	</script>
+	<script src="js/common.js" type="text/javascript">
+
+	</script>
+	<script src="js/vue.js" type="text/javascript"></script>
+
+	<script src="js/public.js" type="text/javascript">
+
+	</script>
+	<script type="text/javascript">
+		new Vue({
+			el: "#app",
+			data: {
+				login: {
+					name: '',
+					pwd: ''
+				},
+				resg: {
+					name: '',
+					pwd: '',
+					phone: '',
+					addr: '',
+					shenfen: '',
+					sex: ''
+				},
+				success: '',
+				out: ''
+			},
+			methods: {
+				//注册方法
+				regs() {
+					$.ajax({
+						url: api + "/api/user/regs",
+						async: true,
+						data: {
+							uname: this.resg.name,
+							upwd: this.resg.pwd,
+							ushenfen: this.resg.phone,
+							uaddr: this.resg.addr,
+							usex: this.resg.shenfen,
+							utell: this.resg.sex
+						},
+						success: function(data) {
+							this.success = data.msg;
+						},
+						type: "post",
+						dataType: "json"
+					})
+				},
+				dologin() {
+					var that = this
+					$.ajax({
+						url: api + "/api/user/doLogin",
+						async: true,
+						data: {
+							uid: this.login.name,
+							upwd: this.login.pwd
+						},
+						success: function(data) {
+							console.log(data);
+							console.log(that.login.name)
+							if (data.code == 200) {
+								$.cookie('USERINFO', that.login.name, {
+									expires: 7
+								});
+								$.cookie('TOKEN', data.token, {
+									expires: 7
+								});
+							} else {
+								alert(data.msg)
+							}
+							// this.success = data.msg;
+						},
+						type: "post",
+						dataType: "json"
+					})
+				},
+				getTime() {
+					var that = this
+					$.ajax({
+						url: api + "/api/user/getRedisTime",
+						async: true,
+						data: {
+							uid: this.login.name,
+							upwd: this.login.pwd
+						},
+						success: function(data) {
+							// this.success = data.msg;
+							alert(data)
+						},
+						type: "post",
+						dataType: "json"
+					})
+				}
+			}
+		})
+	</script>
+</html>

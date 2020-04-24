@@ -1,0 +1,71 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://62.234.118.219:3306/zys_store?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+    password: lalala.123456
+    username: root
+    druid:
+      #最大连接个数
+      max-active: 10
+      #最小空闲连接个数
+      min-idle: 5
+      #获取连接时最大等待时间，单位毫秒。
+      max-wait: 5000
+      #初始化连接个数
+      initial-size: 5
+      #用来检测连接是否有效的sql，要求是一个查询语句。
+      validation-query: select 1
+      stat-view-servlet:
+        enabled: true
+        #        login-username: admin
+        #        login-password: admin
+        #        allow:
+        #        deny:
+        url-pattern: "/druid/*"
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/druid/**"
+        exclusions: '*.js,*.gif,*.jpg,*.jpeg,*.png,*.css,*.ico,*.jsp,/druid/*'
+        principal-session-name: ''
+        session-stat-enable: true
+        session-stat-max-count: 1000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #redis
+  redis:
+    host: 62.234.118.219
+#    password: 123456
+    port: 6379
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 8
+        min-idle: 0
+        max-wait: 2000
+#shiro的配置
+shiro:
+  hash-algorithm-name: md5
+  hash-iterations: 2
+  login-url: /index.html
+  unauthorized-url: /unauthorized.html
+  anon-urls:
+    - /api/user/regs
+    - /api/user/doLogin
+    - /api/druid/**
+    - /api/swagger-ui.html
+    - /api/webjars/**
+    - /api/swagger-resources/**
+    - /api/v2/**
+    - /api/login/captcha
+    - /api/login/checkLogin
+  logout-url: /api/login/logout*
+  authc-urls:
+    - /**
+  #mybatisplus的配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*/*Mapper.xml
+server:
+  port: 8080

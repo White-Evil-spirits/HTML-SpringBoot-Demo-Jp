@@ -14,12 +14,12 @@ import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.util.WebUtils;
 import org.crazycake.shiro.RedisManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.params.SetParams;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -45,8 +45,10 @@ public class UsersController {
     @Autowired
     RedisManager iRedisManager;
 
+    @Autowired
+    public StringRedisTemplate stringRedisTemplate;
 
-     private JedisPool jedisPool;
+    private JedisPool jedisPool;
 
     //注册
     /**

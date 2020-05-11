@@ -27,6 +27,13 @@ public class CarkController {
     @Autowired
     CarkService carkService;
 
+    /**
+    * @Description: 
+    * @Param: [page]
+    * @return: com.zys.boot_jeep.util.DataGridView
+    * @Author: xiaozhang666
+    * @Date: 2020/4/28
+    */ 
     @RequestMapping("getAllCar")
     public DataGridView getAllCar(Integer page){
         System.out.println(page);

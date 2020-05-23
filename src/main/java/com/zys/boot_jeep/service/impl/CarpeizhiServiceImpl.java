@@ -1,5 +1,6 @@
 package com.zys.boot_jeep.service.impl;
 
+import com.zys.boot_jeep.beanApp.xCarShowBean;
 import com.zys.boot_jeep.domain.Carpeizhi;
 import com.zys.boot_jeep.mapper.CarpeizhiMapper;
 import com.zys.boot_jeep.service.CarpeizhiService;
@@ -17,4 +18,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CarpeizhiServiceImpl extends ServiceImpl<CarpeizhiMapper, Carpeizhi> implements CarpeizhiService {
 
+    @Override
+    public xCarShowBean showXCar(String carid) {
+        return this.getBaseMapper().showXCar(carid);
+    }
 }

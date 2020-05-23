@@ -11,21 +11,7 @@ import redis.clients.jedis.Jedis;
 
 @SpringBootTest
 class BootJeepApplicationTests {
-//
-//    @Test
-//    void contextLoads() {
-//        System.out.println(Users_util.getNowDate()+"---");
-//    }
-//
-//    @Test
-//    void contextLoads2() {
-//        //连接Redis服务
-//        Jedis jedis=new Jedis("62.234.118.219",6379);
-//        //查看服务器是否运行，打出pong表示OK
-//        jedis.set("test", "www.zys.com666");
-//        System.out.println("connect is OK============>"+jedis.ping());
-//        System.out.println(jedis.ttl("214293784"));
-//    }
+
 
 
 }

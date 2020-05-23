@@ -26,7 +26,10 @@ public class DataGridView implements Serializable {
         this.count = count;
         this.data = data;
     }
-
+    public DataGridView(Integer code, Object data) {
+        this.code = code;
+        this.data = data;
+    }
     public DataGridView(Object data) {
         this.data = data;
     }

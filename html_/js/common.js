@@ -1,13 +1,9 @@
-var api = 'http://127.0.0.1:8080/'
+var api = 'http://127.0.0.1:8080'
 var baseUrl = 'http://www.leige.tech/'
 var loginUrl = 'http://127.0.0.1:8848/html_/index.html';
 //下次再发ajax请求把token带到后台
 
 
-
-
-
-function setHead() {
 	var token = $.cookie('TOKEN');
 	var userinfo = $.cookie('USERINFO');
 	// console.log($.cookie('TOKEN'))
@@ -25,6 +21,9 @@ function setHead() {
 		if (window.location != loginUrl) {
 			window.location.href = loginUrl;
 		}
-	}
-}
-setHead();
+	} 
+
+
+
+
+

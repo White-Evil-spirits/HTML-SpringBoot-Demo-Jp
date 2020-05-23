@@ -2,4 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zys.boot_jeep.mapper.CarpeizhiMapper">
 
+    <resultMap id="oneCar" type="com.zys.boot_jeep.beanApp.xCarShowBean">
+        <id column="carid" jdbcType="VARCHAR" property="carid" />
+        <result column="carimg" jdbcType="VARCHAR" property="carimg" />
+        <result column="carname" jdbcType="VARCHAR" property="carname" />
+        <result column="cartext" jdbcType="VARCHAR" property="cartext" />
+        <result column="carzt" jdbcType="INTEGER" property="carzt" />
+        <!-- 多表 -->
+        <!-- 配置信息 -->
+        <collection property="carpeizhiList" ofType="com.zys.domain.Carpeizhi" javaType="java.util.ArrayList" column="carid" select="selectPerizhi">
+            <id column="zys_carpeizhi_id" jdbcType="VARCHAR" property="carid" />
+            <result column="pid" jdbcType="VARCHAR" property="pid" />
+            <result column="pname" jdbcType="VARCHAR" property="pname" />
+            <result column="pzt" jdbcType="INTEGER" property="pzt" />
+        </collection>
+        <!-- 配置图片 -->
+        <collection property="carimgList" ofType="com.zys.domain.Carimg" javaType="java.util.ArrayList" column="carid" select="selectPimg">
+            <id column="carid" jdbcType="VARCHAR" property="carid" />
+            <result column="carimg" jdbcType="VARCHAR" property="carimg" />
+        </collection>
+        <!--  详细配置图片 -->
+        <collection property="xcarimgList" ofType="com.zys.domain.Xcarimg" javaType="java.util.ArrayList" column="carid" select="selectPximg">
+            <id column="xcarid" jdbcType="VARCHAR" property="xcarid" />
+            <result column="xcarimg" jdbcType="VARCHAR" property="xcarimg" />
+        </collection>
+    </resultMap>
+
+    <!-- 多表 -->
+    <!-- 配置信息 -->
+    <resultMap id="perizhiMap" type="com.zys.boot_jeep.domain.Carpeizhi">
+        <id column="zys_carpeizhi_id" jdbcType="VARCHAR" property="carid" />
+        <result column="pid" jdbcType="VARCHAR" property="pid" />
+        <result column="pname" jdbcType="VARCHAR" property="pname" />
+        <result column="pzt" jdbcType="INTEGER" property="pzt" />
+    </resultMap>
+    <!-- 配置图片 -->
+    <resultMap id="carImg" type="com.zys.boot_jeep.domain.Carimg">
+        <id column="carid" jdbcType="VARCHAR" property="carid" />
+        <result column="carimg" jdbcType="VARCHAR" property="carimg" />
+    </resultMap>
+    <!-- 详细配置图片 -->
+    <resultMap id="xcarImg" type="com.zys.boot_jeep.domain.Xcarimg">
+        <id column="xcarid" jdbcType="VARCHAR" property="xcarid" />
+        <result column="xcarimg" jdbcType="VARCHAR" property="xcarimg" />
+    </resultMap>
+
+    <!--必须拿到第一个配置的颜色-->
+
+
+    <select id="showXCar" resultMap="oneCar">
+        SELECT carid,carimg,carname, cartext ,carzt FROM zys_cark WHERE carid = #{carid}
+    </select>
+
+    <!-- 配置信息 -->
+    <select id="selectPerizhi" resultMap="perizhiMap">
+        select * from zys_carpeizhi where zys_carpeizhi.`carid` =#{carid}
+    </select>
+
+    <!-- 配置图片 -->
+    <select id="selectPimg" resultMap="carImg">
+        SELECT * FROM zys_carimg WHERE carid=#{#carid}
+    </select>
+
+    <!--  详细配置图片 -->
+    <select id="selectPximg" resultMap="xcarImg">
+        select * from zys_xcarimg where xcarid=#{carid}
+    </select>
+
 </mapper>

@@ -13,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-04-28
  */
 public interface CarpeizhiService extends IService<Carpeizhi> {
-    public xCarShowBean showXCar(String carid);
+    public  xCarShowBean showXCar(String carid);
 }

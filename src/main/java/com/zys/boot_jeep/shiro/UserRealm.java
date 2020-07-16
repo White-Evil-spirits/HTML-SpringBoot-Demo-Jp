@@ -16,12 +16,12 @@ import org.springframework.context.annotation.Lazy;
 
 
 /**
-* @Description:
-* @Param:
-* @return:
-* @Author: xiaozhang666
-* @Date: 2020/4/21
-*/
+ * @Description:
+ * @Param:
+ * @return:
+ * @Author: xiaozhang666
+ * @Date: 2020/4/21
+ */
 public class UserRealm extends AuthorizingRealm {
 
 
@@ -37,16 +37,17 @@ public class UserRealm extends AuthorizingRealm {
 
     /**
      * 认证
+     *
      * @param token
      * @return
      * @throws AuthenticationException
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        String userName=token.getPrincipal().toString();
+        String userName = token.getPrincipal().toString();
         Users users = this.usersService.queryUserByLoginName(userName);
-        if(null!=users){
-            SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(users,users.getUpwd(),ByteSource.Util.bytes(users.getUid()) ,getName());
+        if (null != users) {
+            SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(users, users.getUpwd(), ByteSource.Util.bytes(users.getUid()), getName());
             return info;
         }
         return null;
@@ -55,6 +56,7 @@ public class UserRealm extends AuthorizingRealm {
 
     /**
      * 授权
+     *
      * @param principals
      * @return
      */
